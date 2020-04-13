@@ -92,13 +92,11 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
-          apt-get update -y
-          apt-get install unzip awscli -y
-          apt-get install apache2 -y
-          systemctl start apache2.service
+          sudo yum install httpd -y
+          sudo /etc/init.d/httpd start
           cd /var/www/html
-          aws s3 cp s3://udacity-demo-1/udacity.zip .
-          unzip -o udacity.zip
+          sudo aws s3 cp s3://udacity-demo-1/udacity.zip .
+          sudo unzip -o udacity.zip
       ImageId: ami-0c64dd618a49aeee8
       InstanceType: t3.medium
       IamInstanceProfile: !Ref uIAMProfileASG
